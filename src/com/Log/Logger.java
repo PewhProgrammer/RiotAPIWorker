@@ -31,12 +31,12 @@ public class Logger {
     public static int getLevel(){return mLevel ; }
 
     public static void debug(String msg){
-        if(mLevel <= Level.DEBUG.level)
+        if(mLevel >= Level.DEBUG.level)
             print(Level.DEBUG.toString().charAt(0) + ": " + msg,System.out) ;
     }
 
     public static void info(String msg){
-        if(mLevel <= Level.INFO.level)
+        if(mLevel >= Level.INFO.level)
             print(Level.INFO.toString().charAt(0) + ": " + msg,System.out) ;
     }
 

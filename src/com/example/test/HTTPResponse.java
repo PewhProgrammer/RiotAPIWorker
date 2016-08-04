@@ -26,11 +26,12 @@ public class HTTPResponse {
      */
     public static String processHTTP() throws java.io.IOException {
 
-        String $name = "realwasabi";
+        // whitespaces are replaced by %20
+        String $name = "GIA%20Pride";
         String $region = "euw";
 
         Logger.setLevel(Logger.Level.INFO);
-        Logger.info("initializing Player: " + $name +" in region " + $region);
+        Logger.info("initializing Player " + $name +"(" + $region + ") ...");
 
         ICalls summonerCall = new SummonerCall($name,$region) ;
         Summoner player = CallExecutioner.parseSummoner(summonerCall) ;

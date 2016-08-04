@@ -6,6 +6,7 @@ import com.datastructure.Summoner;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,11 +36,22 @@ public class CallExecutioner {
     }
 
     public static CurrentMatch parseCurrentMatch(ICalls call){
+        JSONObject profil = null ;
         try {
-            JSONObject profil = call.execute();
+            profil = call.execute();
         }catch(IOException e){
             log.log(Level.SEVERE,call.toString() , e);
         }
+
+        Set<String> keys = profil.keySet() ;
+
+        /**
+         * gameId , gameType , gameStartTime , mapId , platformId , gameLength , gameMode , gameQueueConfigId
+         * bannedChampions , participants ,
+         */
+        CurrentMatch returnValue = new CurrentMatch(profil.getJSONObject("gameId"),profil.getJSONObject("gameType"));
+
+
         return null;
     }
 

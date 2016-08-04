@@ -12,6 +12,8 @@ import java.io.IOException;
 public interface  ICalls {
 
     JSONObject execute() throws IOException;
+
     void assembleData();
+
     String toString();
 }

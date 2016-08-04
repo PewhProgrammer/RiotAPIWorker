@@ -3,17 +3,14 @@ package com.api.calls;
 import com.example.test.Domain;
 import com.example.test.HTTPResponse;
 import org.json.JSONObject;
+import com.Log.Logger;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Thinh on 19.06.2016.
  */
 public class CurrentMatchCall implements ICalls {
-
-    private final static Logger log = Logger.getLogger(Domain.class.getName());
 
     private final String id ;
     private final String region ;
@@ -46,9 +43,11 @@ public class CurrentMatchCall implements ICalls {
         try{
             result = HTTPResponse.GETRequest(param.toString());
         }catch(IOException e){
-            log.log( Level.SEVERE, "CurrentMatchCall", e );
+            Logger.info("Player is not in a game");
+            System.exit(1);
         }
 
+        Logger.info(result.toString());
         return result ;
 
     }

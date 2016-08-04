@@ -1,4 +1,4 @@
-package com.test;
+package test;
 
 import com.example.test.Domain;
 import junit.framework.TestCase;

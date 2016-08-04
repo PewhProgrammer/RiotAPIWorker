@@ -1,5 +1,6 @@
 package com.example.test;
 
+import com.Log.Logger;
 import com.api.calls.CurrentMatchCall;
 import com.api.calls.ICalls;
 import com.api.calls.SummonerCall;
@@ -11,15 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Thinh on 19.06.2016.
  */
 public class HTTPResponse {
 
-    private final static Logger log = Logger.getLogger(Domain.class.getName());
 
     /**
      * processes the JSON Response
@@ -31,11 +29,13 @@ public class HTTPResponse {
         String $name = "realwasabi";
         String $region = "euw";
 
+        Logger.setLevel(Logger.Level.INFO);
+        Logger.info("initializing Player: " + $name +" in region " + $region);
+
         ICalls summonerCall = new SummonerCall($name,$region) ;
         Summoner player = CallExecutioner.parseSummoner(summonerCall) ;
         ICalls currentMatchCall = new CurrentMatchCall("" + player.getID(), "euw", "EUW1");
         CurrentMatch cMatch = CallExecutioner.parseCurrentMatch(currentMatchCall) ;
-        log.info($name +" is currently playing!");
 
         return null ;
 

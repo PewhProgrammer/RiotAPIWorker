@@ -11,11 +11,16 @@ public class Summoner {
     private final String mName;
     private final int mID ;
 
+    private final Champion mChamp ;
     private final CurrentMatch.GameSide mTeam ;
+
     private final SpellTable mSpell_1 ;
     private final SpellTable mSpell_2 ;
+
     private final int mProfilIcon ;
     private final boolean mBot ;
+
+
 
 
 
@@ -23,6 +28,7 @@ public class Summoner {
         mName = name ;
         mID = id ;
 
+        mChamp = null ;
         mTeam = null;
         mSpell_1 = null;
         mSpell_2 = null;
@@ -34,10 +40,12 @@ public class Summoner {
 
     }
 
-    public Summoner(String name, int id, int teamId , int spell1 , int spell2, int profilIcon, boolean bot,
+    public Summoner(String name, int id, int championId, int teamId , int spell1 , int spell2, int profilIcon, boolean bot,
                     JSONArray runes, JSONArray masteries){
         mName = name ;
         mID = id ;
+
+        mChamp = new Champion(championId);
 
         mTeam = teamId == 100 ? CurrentMatch.GameSide.Blue : CurrentMatch.GameSide.Red ;
         mSpell_1 = getSpell(spell1);
@@ -83,6 +91,10 @@ public class Summoner {
         System.exit(1);
         return null;
 
+    }
+
+    public Champion getChamp() {
+        return mChamp;
     }
 
     public String getName() {

@@ -46,7 +46,7 @@ public class CurrentMatch {
         Iterator<Object> itPlayers = players.iterator() ;
         while(itPlayers.hasNext()){
             JSONObject JSONPlayer_ = (JSONObject)itPlayers.next() ;
-            summoners.add(newSummoner(JSONPlayer_,"summonerName","summonerId","teamId","spell1Id","spell2Id",
+            summoners.add(newSummoner(JSONPlayer_,"summonerName","summonerId","championId","teamId","spell1Id","spell2Id",
             "profileIconId","runes","bot","masteries"));
         }
 
@@ -58,10 +58,10 @@ public class CurrentMatch {
 
     }
 
-    private Summoner newSummoner(JSONObject JSONPlayer_ , String keys, String id,
+    private Summoner newSummoner(JSONObject JSONPlayer_ , String keys, String id,String championId,
                                  String teamId ,String spell1, String spell2, String profilIcon,
                                  String runes, String bot, String masteries){
-        return new Summoner(JSONPlayer_.getString(keys),JSONPlayer_.getInt(id),JSONPlayer_.getInt(teamId),JSONPlayer_.getInt(spell1),
+        return new Summoner(JSONPlayer_.getString(keys),JSONPlayer_.getInt(id),JSONPlayer_.getInt(championId),JSONPlayer_.getInt(teamId),JSONPlayer_.getInt(spell1),
                 JSONPlayer_.getInt(spell2),JSONPlayer_.getInt(profilIcon),JSONPlayer_.getBoolean(bot),JSONPlayer_.getJSONArray(runes),
                 JSONPlayer_.getJSONArray(masteries));
     }

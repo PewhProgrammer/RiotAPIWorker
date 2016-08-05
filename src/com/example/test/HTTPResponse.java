@@ -79,8 +79,8 @@ public class HTTPResponse {
 
         for(Summoner summ : cMatch.getmSummoners()){
             if(summ.getTeam().equals(CurrentMatch.GameSide.Red))
-                    buildRed.append(summ).append(", ");
-            else    buildBlue.append(summ).append(", ") ;
+                    buildRed.append(summ).append("("+summ.getChamp().toString()+")").append(", ");
+            else    buildBlue.append(summ).append("("+summ.getChamp().toString()+")").append(", ") ;
         }
 
         Logger.info("Team Blue: " + buildBlue.toString());

@@ -10,6 +10,11 @@ public class Champion {
     private final Name mName ;
     private final boolean mFreeToPlay ;
 
+    public Champion(int id){
+        mName = getChampionName(id);
+        mFreeToPlay = false ; //static variable
+    }
+
     public Champion(int id,boolean freeToPlay){
         mName = getChampionName(id) ;
         mFreeToPlay = freeToPlay ;

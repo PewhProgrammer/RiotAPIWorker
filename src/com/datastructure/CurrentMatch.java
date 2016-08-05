@@ -68,18 +68,20 @@ public class CurrentMatch {
 
 
     public enum GameSide{
-        Red("Team Blue"),
-        Blue("Team Red");
+        Red("Team Blue",0),
+        Blue("Team Red",1);
 
-        private final String id ;
+        private final String display ;
+        public final int Id ;
 
-        GameSide(String s){
-            id = s ;
+        GameSide(String s,int id){
+            display = s ;
+            Id = id ;
         }
 
         @Override
         public String toString(){
-            return id ;
+            return display ;
         }
     }
 

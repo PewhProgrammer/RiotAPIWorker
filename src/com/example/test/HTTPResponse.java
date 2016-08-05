@@ -73,6 +73,19 @@ public class HTTPResponse {
         ICalls currentMatchCall = new CurrentMatchCall("" + player.getID(), $region, "EUW1");
 
         CurrentMatch cMatch = CallExecutioner.parseCurrentMatch(currentMatchCall) ;
+
+        StringBuilder buildRed = new StringBuilder();
+        StringBuilder buildBlue = new StringBuilder();
+
+        for(Summoner summ : cMatch.getmSummoners()){
+            if(summ.getTeam().equals(CurrentMatch.GameSide.Red))
+                    buildRed.append(summ).append(", ");
+            else    buildBlue.append(summ).append(", ") ;
+        }
+
+        Logger.info("Team Blue: " + buildBlue.toString());
+        Logger.info("Team Red : " + buildRed.toString());
+
     }
 
     private static void analyseData(){}

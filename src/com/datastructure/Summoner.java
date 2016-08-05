@@ -48,7 +48,8 @@ public class Summoner {
 
         //TODO: process runes and masteries
 
-        Logger.info(runes.toString());
+        //runes for each player
+        //Logger.info(runes.toString());
 
     }
 
@@ -92,6 +93,26 @@ public class Summoner {
         return mID;
     }
 
+    public CurrentMatch.GameSide getTeam() {
+        return mTeam;
+    }
+
+    public SpellTable getSpell_1() {
+        return mSpell_1;
+    }
+
+    public SpellTable getSpell_2() {
+        return mSpell_2;
+    }
+
+    public int getProfilIcon() {
+        return mProfilIcon;
+    }
+
+    public boolean isBot() {
+        return mBot;
+    }
+
     @Override
     public boolean equals(Object other){
         if(!(other instanceof Summoner)) return false ;
@@ -100,5 +121,10 @@ public class Summoner {
         if(sum.getName().equals(mName) && sum.getID() == mID) return true ;
 
         return false ;
+    }
+
+    @Override
+    public String toString(){
+        return this.mName;
     }
 }

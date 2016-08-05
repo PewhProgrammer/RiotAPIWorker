@@ -46,12 +46,12 @@ public class CurrentMatch {
         Iterator<Object> itPlayers = players.iterator() ;
         while(itPlayers.hasNext()){
             JSONObject JSONPlayer_ = (JSONObject)itPlayers.next() ;
-            Logger.info(JSONPlayer_.toString());
-            summoners.add(newSummoner(JSONPlayer_,"summonerName","teamId","summonerId","spell1Id","spell2Id",
+            summoners.add(newSummoner(JSONPlayer_,"summonerName","summonerId","teamId","spell1Id","spell2Id",
             "profileIconId","runes","bot","masteries"));
         }
 
-        summoners.forEach(sum -> Logger.info(""+sum.getName()));
+        //each player
+        //Logger.info("SummonerList : " + summoners.toString());
         // championID , profilIconID , runes , bot , teamId , summonerName ,spell1,summonerid , spell2 , masteries
 
         mSummoners = new HashSet<>(summoners);
@@ -66,6 +66,37 @@ public class CurrentMatch {
                 JSONPlayer_.getJSONArray(masteries));
     }
 
+    public int getmGameID() {
+        return mGameID;
+    }
+
+    public int getmGameStartTime() {
+        return mGameStartTime;
+    }
+
+    public int getmMapID() {
+        return mMapID;
+    }
+
+    public int getmGameLength() {
+        return mGameLength;
+    }
+
+    public int getmGameQueueConfigId() {
+        return mGameQueueConfigId;
+    }
+
+    public String getmGameType() {
+        return mGameType;
+    }
+
+    public String getmGameMode() {
+        return mGameMode;
+    }
+
+    public Set<Summoner> getmSummoners() {
+        return mSummoners;
+    }
 
     public enum GameSide{
         Red("Team Blue",0),

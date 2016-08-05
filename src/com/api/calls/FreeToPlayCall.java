@@ -41,7 +41,6 @@ public class FreeToPlayCall implements ICalls {
             System.exit(1);
         }
 
-        Logger.info(result.toString());
         return result ;
     }
 

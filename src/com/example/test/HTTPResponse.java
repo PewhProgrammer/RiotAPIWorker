@@ -5,6 +5,7 @@ import com.api.calls.CurrentMatchCall;
 import com.api.calls.FreeToPlayCall;
 import com.api.calls.ICalls;
 import com.api.calls.SummonerCall;
+import com.datastructure.Champion;
 import com.datastructure.CurrentMatch;
 import com.datastructure.Summoner;
 import org.json.JSONObject;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Thinh on 19.06.2016.
@@ -55,8 +58,10 @@ public class HTTPResponse {
         Logger.info("retrieve freeToPlay rotation this week...");
 
         ICalls freeToPlayCall = new FreeToPlayCall($region);
-        CallExecutioner.parseFreeToPlay(freeToPlayCall);
+        Set<Champion> champs = CallExecutioner.parseFreeToPlay(freeToPlayCall);
 
+        //display champs in console
+        Logger.info(champs.toString());
     }
 
     private static void currentMatch(String $name, String $region){

@@ -84,10 +84,8 @@ public class CallExecutioner {
             JSONObject obj = (JSONObject)it.next();
             champs.add(new Champion(obj.getInt("id"),true)) ;
          }
-        Logger.info(champions.toString());
-        Logger.info(champs.toString());
 
-        return null ;
+        return champs;
 
     }
 

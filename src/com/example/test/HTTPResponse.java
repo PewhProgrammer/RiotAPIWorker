@@ -2,6 +2,7 @@ package com.example.test;
 
 import com.Log.Logger;
 import com.api.calls.CurrentMatchCall;
+import com.api.calls.FreeToPlayCall;
 import com.api.calls.ICalls;
 import com.api.calls.SummonerCall;
 import com.datastructure.CurrentMatch;
@@ -24,23 +25,54 @@ public class HTTPResponse {
      * @return
      * @throws java.io.IOException
      */
-    public static String processHTTP() throws java.io.IOException {
+    public static void processHTTP() throws java.io.IOException {
 
-        // whitespaces are replaced by %20
-        String $name = "GIA%20Pride";
-        String $region = "euw";
+        /**
+         * display GUI Information in the methods
+         */
 
         Logger.setLevel(Logger.Level.INFO);
+
+        switch(StaticData.task){
+            case FreeToPlay:
+                freeToPlay(StaticData.__REGION__);
+                break;
+            case CurrentMatch:
+                currentMatch(StaticData.__NAME__,StaticData.__REGION__);
+                break;
+            case AnalyseData:
+                analyseData();
+                break;
+            default:
+                Logger.debug("Unresolved StaticData found: " + StaticData.task);
+                break;
+        }
+
+    }
+
+    private static void freeToPlay(String $region){
+
+        Logger.info("retrieve freeToPlay rotation this week...");
+
+        ICalls freeToPlayCall = new FreeToPlayCall($region);
+        CallExecutioner.parseFreeToPlay(freeToPlayCall);
+
+    }
+
+    private static void currentMatch(String $name, String $region){
+
         Logger.info("initializing Player " + $name +"(" + $region + ") ...");
 
         ICalls summonerCall = new SummonerCall($name,$region) ;
         Summoner player = CallExecutioner.parseSummoner(summonerCall) ;
-        ICalls currentMatchCall = new CurrentMatchCall("" + player.getID(), "euw", "EUW1");
+        ICalls currentMatchCall = new CurrentMatchCall("" + player.getID(), $region, "EUW1");
+
         CurrentMatch cMatch = CallExecutioner.parseCurrentMatch(currentMatchCall) ;
-
-        return null ;
-
     }
+
+    private static void analyseData(){}
+
+
 
     public static JSONObject GETRequest(String param) throws IOException{
         URL url = new URL(param.toString());

@@ -2,12 +2,16 @@ package com.example.test;
 
 import com.Log.Logger;
 import com.api.calls.ICalls;
+import com.datastructure.Champion;
 import com.datastructure.CurrentMatch;
 import com.datastructure.Summoner;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -60,6 +64,31 @@ public class CallExecutioner {
 
 
         return returnValue;
+    }
+
+    public static Set<Champion> parseFreeToPlay(ICalls call){
+
+        Set<Champion> champs = new HashSet<>();
+
+        JSONObject champions = null ;
+        try {
+            champions = call.execute();
+        }catch(IOException e){
+            Logger.debug("Error occured in FreeToPlay call execution");
+        }
+
+        JSONArray allChampions = champions.getJSONArray("champions") ;
+        Iterator<Object> it = allChampions.iterator() ;
+
+        while(it.hasNext()){
+            JSONObject obj = (JSONObject)it.next();
+            champs.add(new Champion(obj.getInt("id"),true)) ;
+         }
+        Logger.info(champions.toString());
+        Logger.info(champs.toString());
+
+        return null ;
+
     }
 
 

@@ -1,15 +1,10 @@
 package com.api.calls;
 
-import com.datastructure.Summoner;
 import com.example.test.Domain;
 import com.example.test.HTTPResponse;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.logging.Logger;
 
 /**

@@ -30,6 +30,10 @@ public class Summoner {
         mBot = false;
     }
 
+    public class Runes{
+
+    }
+
     public Summoner(String name, int id, int teamId , int spell1 , int spell2, int profilIcon, boolean bot,
                     JSONArray runes, JSONArray masteries){
         mName = name ;
@@ -44,6 +48,7 @@ public class Summoner {
 
         //TODO: process runes and masteries
 
+        Logger.info(runes.toString());
 
     }
 

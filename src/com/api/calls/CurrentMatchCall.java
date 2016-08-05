@@ -1,6 +1,5 @@
 package com.api.calls;
 
-import com.example.test.Domain;
 import com.example.test.HTTPResponse;
 import org.json.JSONObject;
 import com.Log.Logger;

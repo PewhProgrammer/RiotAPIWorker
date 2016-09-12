@@ -1,4 +1,5 @@
 @startuml
+scale 1920x1080
 
 interface ICalls{
     +JSONObject execute();

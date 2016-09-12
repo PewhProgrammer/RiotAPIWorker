@@ -23,7 +23,7 @@ public class CurrentMatchCall implements ICalls {
 
 
     @Override
-    public JSONObject execute() throws IOException {
+    public JSONObject execute(){
 
         StringBuilder param = new StringBuilder() ;
 

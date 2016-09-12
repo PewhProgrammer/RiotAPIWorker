@@ -1,0 +1,126 @@
+@startuml
+
+interface ICalls{
+    +JSONObject execute();
+    +String toString();
+    __Not Used__
+    +void assembleData();
+}
+
+
+ICalls <|-- MatchCall
+ICalls <|-- SummonerCall
+ICalls <|-- CurrentMatchCall
+ICalls <|-- RecentGamesCall
+ICalls <|-- FreeToPlayCall
+
+
+class Champion{
+    +Champion(int id);
+    +Champion(int id,boolean freeToPlay);
+    ..Simple Getter..
+    -Name getChampionName(int i);
+}
+
+class CurrentMatch{
+    -final int mGameID  ;
+    -final int mGameStartTime ;
+    -final int mMapID ;
+    -final int mGameLength ;
+    -final int mGameQueueConfigId ;
+    -final String mGameType ;
+    -final String mGameMode ;
+    -final Set<Summoner> mSummoners ;
+    ----
+    +CurrentMatch(JSONArray players, List<Integer> argV, String... game );
+    -Summoner newSummoner(JSONObject JSONPlayer_ , String keys, String id,String championId,
+                                      String teamId ,String spell1, String spell2, String profilIcon,
+                                      String runes, String bot, String masteries);
+    ..Simple Getter..
+    +int getGameID();
+    +int getGameStartTime();
+    +int getMapID();
+    +int getGameLength();
+    +int getGameQueueConfigId();
+    +String getGameType();
+    +String getGameMode();
+    +Set<Summoner> getSummoners();
+}
+
+class Summoner{
+    -final String mName;
+    -final int mID ;
+
+    -final Champion mChamp ;
+    -final CurrentMatch.GameSide mTeam ;
+
+    -final SpellTable mSpell_1 ;
+    -final SpellTable mSpell_2 ;
+
+    -final int mProfilIcon ;
+    -final boolean mBot ;
+    ----
+    +Summoner(String name,int id)
+    +Summoner(String name, int id, int championId, int teamId , int spell1 , int spell2, int profilIcon, boolean bot,
+                         JSONArray runes, JSONArray masteries)
+    +boolean isBot()
+    -SpellTable getSpell(int i)
+
+    ..Simple Getter..
+
+    +Champion getChamp()
+
+    +String getName()
+
+    +int getID()
+
+    +CurrentMatch.GameSide getTeam()
+
+    +SpellTable getSpell_1()
+
+    +SpellTable getSpell_2()
+
+    +int getProfilIcon()
+}
+
+enum SpellTable {
+Cleanse
+Clairvoyance
+Exhaust
+Flash
+Ghost
+Heal
+Smite
+Teleport
+Clarity
+Ignite
+SpellTable(int id,String description)
+}
+
+class StaticData{
+__NOT VISIBLE__
+}
+
+class CallExecutioner<<Singleton>>{
++{static} Summoner parseSummoner(ICalls call)
++{static} CurrentMatch parseCurrentMatch(ICalls call)
++{static} Set<Champion> parseFreeToPlay(ICalls call)
++{static} List<Game> parseRecentMatches(ICalls call)
+-Game newGame(JSONObject game, JSONObject stats)
+}
+
+class HTTPResponse{
++{static}void processHTTP()
+-{static}void freeToPlay(String $region)
+-{static}void currentMatch(String $name, String $region)
+-{static}void analyseData(String $name,String $region)
++{static}JSONObject GETRequest(String param) throws IOException
+}
+
+note top of ICalls : Executable object to send the \nHTTP Request via summoner key
+note top of CurrentMatch : Used to store match information
+note top of Summoner : Used to store summoner information
+note top of StaticData : information retrieval for task and summoner
+note top of CallExecutioner : Execute all Calls and\nparse them into customizable objects
+note top of HTTPResponse : Manages task execution and\ndisplay of GUI information
+@enduml

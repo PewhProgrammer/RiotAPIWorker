@@ -21,9 +21,6 @@ public class Summoner {
     private final boolean mBot ;
 
 
-
-
-
     public Summoner(String name,int id){
         mName = name ;
         mID = id ;

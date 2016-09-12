@@ -9,26 +9,30 @@ import java.io.IOException;
 /**
  * Created by Thinh-Laptop on 05.08.2016.
  */
-public class FreeToPlayCall implements ICalls {
+public class RecentGamesCall implements ICalls{
 
-    protected final String region ;
+    private final String region ;
+    private final int id ;
 
-    public FreeToPlayCall(String reg){
-        region = reg ;
+    public RecentGamesCall(String r,int i){
+        region = r ;
+        id = i ;
     }
 
     @Override
-    public JSONObject execute(){
-        StringBuilder param = new StringBuilder() ;
+    public JSONObject execute() {
 
-        //https://euw.api.pvp.net/api/lol/euw/v1.2/champion?freeToPlay=true&api_key=303ccbe7-3c57-4d13-a389-d109963f4535
+        //https://euw.api.pvp.net/api/lol/euw/v1.3/game/by-summoner/83009291/recent?api_key=303ccbe7-3c57-4d13-a389-d109963f4535
+
+        StringBuilder param = new StringBuilder() ;
 
         param.append("https://")
                 .append(region)
                 .append(".api.pvp.net/api/lol/")
                 .append(region)
-                .append("/")
-                .append("v1.2/champion?freeToPlay=true&api_key=")
+                .append("/v1.3/game/by-summoner/")
+                .append(id)
+                .append("/recent?api_key=")
                 .append(APIKey.API_KEY);
 
 
@@ -37,7 +41,7 @@ public class FreeToPlayCall implements ICalls {
         try{
             result = HTTPResponse.GETRequest(param.toString());
         }catch(IOException e){
-            Logger.info("Couldn't retrieve free to play rotation for "+ region);
+            Logger.info("Couldn't retrieve recent matches information from "+ id);
             System.exit(1);
         }
 

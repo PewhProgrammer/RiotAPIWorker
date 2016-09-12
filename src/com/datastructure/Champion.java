@@ -11,8 +11,7 @@ public class Champion {
     private final boolean mFreeToPlay ;
 
     public Champion(int id){
-        mName = getChampionName(id);
-        mFreeToPlay = false ; //static variable
+        this(id,false);
     }
 
     public Champion(int id,boolean freeToPlay){
@@ -108,7 +107,7 @@ public class Champion {
         Gragas(79),
         Lulu(117),
         Poppy(78),
-        fiora(114),
+        Fiora(114),
         Udyr(77),
         Ziggs(115),
         Viktor(112),
@@ -132,7 +131,7 @@ public class Champion {
         Rumble(68),
         Khazix(121),
         Darius(122),
-        Hexarim(120),
+        Hecarim(120),
         Skarner(72),
         Lucian(236),
         Heimerdinger(74),

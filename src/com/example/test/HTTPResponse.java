@@ -1,12 +1,10 @@
 package com.example.test;
 
 import com.Log.Logger;
-import com.api.calls.CurrentMatchCall;
-import com.api.calls.FreeToPlayCall;
-import com.api.calls.ICalls;
-import com.api.calls.SummonerCall;
+import com.api.calls.*;
 import com.datastructure.Champion;
 import com.datastructure.CurrentMatch;
+import com.datastructure.Game;
 import com.datastructure.Summoner;
 import org.json.JSONObject;
 
@@ -43,8 +41,8 @@ public class HTTPResponse {
             case CurrentMatch:
                 currentMatch(StaticData.__NAME__,StaticData.__REGION__);
                 break;
-            case AnalyseData:
-                analyseData();
+            case AnalyseRecentMatches:
+                analyseData(StaticData.__NAME__,StaticData.__REGION__);
                 break;
             default:
                 Logger.debug("Unresolved StaticData found: " + StaticData.task);
@@ -77,7 +75,7 @@ public class HTTPResponse {
         StringBuilder buildRed = new StringBuilder();
         StringBuilder buildBlue = new StringBuilder();
 
-        for(Summoner summ : cMatch.getmSummoners()){
+        for(Summoner summ : cMatch.getSummoners()){
             if(summ.getTeam().equals(CurrentMatch.GameSide.Red))
                     buildRed.append(summ).append("("+summ.getChamp().toString()+")").append(", ");
             else    buildBlue.append(summ).append("("+summ.getChamp().toString()+")").append(", ") ;
@@ -88,7 +86,18 @@ public class HTTPResponse {
 
     }
 
-    private static void analyseData(){}
+    private static void analyseData(String $name,String $region){
+        Logger.info("analysing Player " + $name +"(" + $region + ") recent matches ...");
+
+        ICalls summonerCall = new SummonerCall($name,$region) ;
+        Summoner player = CallExecutioner.parseSummoner(summonerCall) ;
+
+        ICalls recent = new RecentGamesCall($region,player.getID()) ;
+        List<Game> games = CallExecutioner.parseRecentMatches(recent);
+
+
+
+    }
 
 
 

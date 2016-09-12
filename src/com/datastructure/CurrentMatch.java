@@ -66,35 +66,35 @@ public class CurrentMatch {
                 JSONPlayer_.getJSONArray(masteries));
     }
 
-    public int getmGameID() {
+    public int getGameID() {
         return mGameID;
     }
 
-    public int getmGameStartTime() {
+    public int getGameStartTime() {
         return mGameStartTime;
     }
 
-    public int getmMapID() {
+    public int getMapID() {
         return mMapID;
     }
 
-    public int getmGameLength() {
+    public int getGameLength() {
         return mGameLength;
     }
 
-    public int getmGameQueueConfigId() {
+    public int getGameQueueConfigId() {
         return mGameQueueConfigId;
     }
 
-    public String getmGameType() {
+    public String getGameType() {
         return mGameType;
     }
 
-    public String getmGameMode() {
+    public String getGameMode() {
         return mGameMode;
     }
 
-    public Set<Summoner> getmSummoners() {
+    public Set<Summoner> getSummoners() {
         return mSummoners;
     }
 
